@@ -15,7 +15,7 @@ class AdminController extends Controller
 
   public function postLoginAdmin(Request $req)
   {
-    if (Auth::attempt(['email' => $req->email, 'password' => $req->password], $req->remember)) {
+    if (Auth::attempt(['email' => $req->email, 'password' => $req->password, 'role' => 1], $req->remember)) {
       return redirect()->route('admin.index');
     }
     return redirect()->back()->with('err', 'Login Failed');
