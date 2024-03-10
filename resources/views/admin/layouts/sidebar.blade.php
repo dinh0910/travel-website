@@ -10,14 +10,13 @@
         <li>
           <a href="{{route('admin.image')}}" class="waves-effect">
             <i class="ion-md-speedometer"></i>
-            <span> Upload Image </span>
+            <span> Upload File </span>
             {{-- <span class="badge badge-info badge-pill float-right"> 3 </span> --}}
           </a>
-          {{-- <ul class="nav-second-level" aria-expanded="false">
-            <li><a href="index.html">Dashboard 1</a></li>
-            <li><a href="dashboard-2.html">Dashboard 2</a></li>
-            <li><a href="dashboard-3.html">Dashboard 3</a></li>
-          </ul> --}}
+          <ul class="nav-second-level" aria-expanded="false">
+            <li><a href="index.html">Library</a></li>
+            <li><a href="{{route('admin.image')}}">Add New Media File</a></li>
+          </ul>
         </li>
 
         {{-- <li>

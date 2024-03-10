@@ -31,5 +31,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
   Route::middleware('log')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
     Route::get('/images', [ImageController::class, 'index'])->name('admin.image');
+    Route::post('/images', [ImageController::class, 'upload'])->name('admin.upload');
   });
 });

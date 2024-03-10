@@ -13,6 +13,7 @@
 
   <!-- Plugins css-->
   <link href="{{asset('assets')}}\admin\libs\sweetalert2\sweetalert2.min.css" rel="stylesheet" type="text/css">
+  <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 
   <!-- App css -->
   <link href="{{asset('assets')}}\admin\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
@@ -55,6 +56,7 @@
   <script src="{{asset('assets')}}\admin\libs\moment\moment.min.js"></script>
   <script src="{{asset('assets')}}\admin\libs\jquery-scrollto\jquery.scrollTo.min.js"></script>
   <script src="{{asset('assets')}}\admin\libs\sweetalert2\sweetalert2.min.js"></script>
+  <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
 
   <!-- Chat app -->
   <script src="{{asset('assets')}}\admin\js\pages\jquery.chat.js"></script>
