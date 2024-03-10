@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Log as ModelsLog;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
-class AdminAuthenticate
+class LogMiddleware
 {
   /**
    * Handle an incoming request.
@@ -17,6 +18,16 @@ class AdminAuthenticate
    */
   public function handle(Request $request, Closure $next)
   {
-    return (Auth::check()) ? $next($request) : redirect()->route('admin.login');
+    $requestData = [
+      'request' => $request->method(),
+      // 'request' => $request->headers->get('referer'),
+      'endpoint' => $request->fullUrl(),
+      // 'endpoint' => $request->path(),
+      // Add more details as needed
+    ];
+
+    ModelsLog::create($requestData);
+
+    return $next($request);
   }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
   return view('welcome');
+})->middleware('log');
+
+
+
+Route::prefix('login-admin')->middleware('log')->group(function () {
+  Route::get('/login-admin', [AdminController::class, 'login'])->name('admin.login');
+  Route::post('/login-admin', [AdminController::class, 'postLoginAdmin']);
 });
 
-Route::get('/login-admin', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/login-admin', [AdminController::class, 'postLoginAdmin']);
-
 Route::prefix('admin')->middleware('admin')->group(function () {
-  Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+  Route::middleware('log')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+    Route::get('/images', [ImageController::class, 'index'])->name('admin.image');
+  });
 });
