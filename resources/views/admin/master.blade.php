@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Dashboard 1 | Velonic - Responsive Bootstrap 4 Admin Dashboard</title>
+  <title>@yield('title')</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="Responsive bootstrap 4 admin template" name="description">
   <meta content="Coderthemes" name="author">
@@ -13,12 +13,25 @@
 
   <!-- Plugins css-->
   <link href="{{asset('assets')}}\admin\libs\sweetalert2\sweetalert2.min.css" rel="stylesheet" type="text/css">
-  <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
+  <!-- third party css -->
+  <link href="{{asset('assets')}}\admin\libs\datatables\dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets')}}\admin\libs\datatables\buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets')}}\admin\libs\datatables\responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+  <link href="{{asset('assets')}}\admin\libs\datatables\select.bootstrap4.min.css" rel="stylesheet" type="text/css"> 
 
   <!-- App css -->
   <link href="{{asset('assets')}}\admin\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
   <link href="{{asset('assets')}}\admin\css\icons.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('assets')}}\admin\css\app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet">
+
+  <style>
+    .table-fixed td{
+      max-width: 250px;
+      max-height: 100%;
+      word-wrap: break-word;
+    }
+  </style>
 
 </head>
 
@@ -73,6 +86,34 @@
 
   <!-- Dashboard init JS -->
   <script src="{{asset('assets')}}\admin\js\pages\dashboard.init.js"></script>
+
+  <!-- Required datatable js -->
+  <script src="{{asset('assets')}}\admin\libs\datatables\jquery.dataTables.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\dataTables.bootstrap4.min.js"></script>
+  <!-- Buttons examples -->
+  <script src="{{asset('assets')}}\admin\libs\datatables\dataTables.buttons.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\buttons.bootstrap4.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\jszip\jszip.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\pdfmake\pdfmake.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\pdfmake\vfs_fonts.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\buttons.html5.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\buttons.print.min.js"></script>
+
+  <!-- Responsive examples -->
+  <script src="{{asset('assets')}}\admin\libs\datatables\dataTables.responsive.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\responsive.bootstrap4.min.js"></script>
+
+  <script src="{{asset('assets')}}\admin\libs\datatables\dataTables.keyTable.min.js"></script>
+  <script src="{{asset('assets')}}\admin\libs\datatables\dataTables.select.min.js"></script>
+
+  <!-- Datatables init -->
+  <script src="{{asset('assets')}}\admin\js\pages\datatables.init.js"></script>
+
+    <!-- Plugin js-->
+    <script src="{{asset('assets')}}\admin\libs\parsleyjs\parsley.min.js"></script>
+
+    <!-- Validation init js-->
+    <script src="{{asset('assets')}}\admin\js\pages\form-validation.init.js"></script>
 
   <!-- App js -->
   <script src="{{asset('assets')}}\admin\js\app.min.js"></script>

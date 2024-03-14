@@ -1,0 +1,12 @@
+.wrapper{
+  position: static;
+}
+
+.attachment{
+  list-style: none;
+  position: relative;
+  cursor: pointer;
+  float: left;
+  box-sizing: border-box;
+}
+

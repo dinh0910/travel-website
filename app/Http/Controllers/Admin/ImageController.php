@@ -10,7 +10,12 @@ class ImageController extends Controller
 {
   public function index()
   {
-    return view('admin.images.index');
+    return view('admin.images.upload');
+  }
+
+  public function library(){
+    $images = Image::all();
+    return view('admin.images.library', compact('images'));
   }
 
   public function upload(Request $request)
