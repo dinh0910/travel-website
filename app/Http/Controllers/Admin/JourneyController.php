@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Journey;
-use App\Models\Place;
-use App\Models\Tour;
 use Illuminate\Http\Request;
 
-class TourController extends Controller
+class JourneyController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -17,10 +15,8 @@ class TourController extends Controller
    */
   public function index()
   {
-    $tours = Tour::all();
-    $places = Place::all();
     $journeys = Journey::all();
-    return view('admin.tours.index', compact('tours', 'places', 'journeys'));
+    return view('admin.journeys.index', compact('journeys'));
   }
 
   /**
@@ -30,9 +26,7 @@ class TourController extends Controller
    */
   public function create()
   {
-    $places = Place::all();
-    $journeys = Journey::all();
-    return view('admin.tours.add', compact('places', 'journeys'));
+    return view('admin.journeys.add');
   }
 
   /**
@@ -43,8 +37,8 @@ class TourController extends Controller
    */
   public function store(Request $req)
   {
-    Tour::create($req->all());
-    return redirect()->route('tour.index');
+    Journey::create($req->all());
+    return redirect()->route('journey.index');
   }
 
   /**
@@ -64,11 +58,9 @@ class TourController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit(Tour $tour)
+  public function edit(Journey $journey)
   {
-    $places = Place::all();
-    $journeys = Journey::all();
-    return view('admin.tours.edit', compact('tour', 'places', 'journeys'));
+    return view('admin.journeys.edit', compact('journey'));
   }
 
   /**
@@ -78,10 +70,10 @@ class TourController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $req, Tour $tour)
+  public function update(Request $req, Journey $journey)
   {
-    $tour->update($req->all());
-    return redirect()->route('tour.index');
+    $journey->update($req->all());
+    return redirect()->route('journey.index');
   }
 
   /**
@@ -90,9 +82,9 @@ class TourController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Tour $tour)
+  public function destroy(Journey $journey)
   {
-    $tour->delete();
-    return redirect()->route('tour.index');
+    $journey->delete();
+    return redirect()->route('journey.index');
   }
 }

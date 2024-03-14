@@ -36,6 +36,19 @@
         <li>
           <a href="javascript: void(0);" class="waves-effect">
             <i class="ion-md-speedometer"></i>
+            <span> Hành trình </span>
+            <span class="menu-arrow"></span>
+            {{-- <span class="badge badge-info badge-pill float-right"> 3 </span> --}}
+          </a>
+          <ul class="nav-second-level" aria-expanded="false">
+            <li><a href="{{route('journey.index')}}">Dách sách hành trình</a></li>
+            <li><a href="{{route('journey.create')}}">Thêm hành trình</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="ion-md-speedometer"></i>
             <span> Khách sạn </span>
             <span class="menu-arrow"></span>
             {{-- <span class="badge badge-info badge-pill float-right"> 3 </span> --}}
@@ -54,8 +67,8 @@
             {{-- <span class="badge badge-info badge-pill float-right"> 3 </span> --}}
           </a>
           <ul class="nav-second-level" aria-expanded="false">
-            <li><a href="javascript: void(0);">Dách sách Tour</a></li>
-            <li><a href="javascript: void(0);">Thêm Tour du lịch</a></li>
+            <li><a href="{{route('tour.index')}}">Dách sách Tour</a></li>
+            <li><a href="{{route('tour.create')}}">Thêm Tour du lịch</a></li>
           </ul>
         </li>
 

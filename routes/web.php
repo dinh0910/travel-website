@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HotelController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\JourneyController;
 use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\PlaceController;
+use App\Http\Controllers\Admin\TourController;
 use App\Models\Place;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +26,6 @@ Route::get('/', function () {
   return view('welcome');
 })->middleware('log');
 
-
-
 Route::prefix('login-admin')->middleware('log')->group(function () {
   Route::get('/login-admin', [AdminController::class, 'login'])->name('admin.login');
   Route::post('/login-admin', [AdminController::class, 'postLoginAdmin']);
@@ -37,12 +37,19 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/library', [ImageController::class, 'library'])->name('admin.library');
     Route::get('/upload-image', [ImageController::class, 'index'])->name('admin.image');
     Route::post('/upload-image', [ImageController::class, 'upload'])->name('admin.upload');
+    Route::delete('/library', [ImageController::class, 'destroy'])->name('image.delete');
 
     //Places
     Route::resource('place', PlaceController::class);
 
     //Hotels
     Route::resource('hotel', HotelController::class);
+
+    //Tours
+    Route::resource('tour', TourController::class);
+
+    //Journeys
+    Route::resource('journey', JourneyController::class);
 
     //Logs
     Route::get('/log', [LogController::class, 'index'])->name('admin.log');

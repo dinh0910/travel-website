@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ImageController extends Controller
 {
@@ -13,7 +14,8 @@ class ImageController extends Controller
     return view('admin.images.upload');
   }
 
-  public function library(){
+  public function library()
+  {
     $images = Image::all();
     return view('admin.images.library', compact('images'));
   }
@@ -38,9 +40,14 @@ class ImageController extends Controller
         ]);
       }
     }
-
-    // Handle other logic (e.g., save image details to database)
-
     return redirect()->back()->with('success', 'Image uploaded successfully!');
+  }
+
+  public function destroy(Request $req)
+  {
+    $img = Image::find($req->id);
+    $img->delete();
+    File::delete( $img->path);
+    return redirect()->route('admin.library');
   }
 }

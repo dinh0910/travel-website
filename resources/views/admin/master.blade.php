@@ -20,6 +20,8 @@
   <link href="{{asset('assets')}}\admin\libs\datatables\responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('assets')}}\admin\libs\datatables\select.bootstrap4.min.css" rel="stylesheet" type="text/css"> 
 
+  <link href="{{asset('assets')}}\admin\libs\select2\select2.min.css" rel="stylesheet" type="text/css">
+
   <!-- App css -->
   <link href="{{asset('assets')}}\admin\css\bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet">
   <link href="{{asset('assets')}}\admin\css\icons.min.css" rel="stylesheet" type="text/css">
@@ -109,11 +111,15 @@
   <!-- Datatables init -->
   <script src="{{asset('assets')}}\admin\js\pages\datatables.init.js"></script>
 
-    <!-- Plugin js-->
-    <script src="{{asset('assets')}}\admin\libs\parsleyjs\parsley.min.js"></script>
+  <!-- Plugin js-->
+  <script src="{{asset('assets')}}\admin\libs\parsleyjs\parsley.min.js"></script>
 
-    <!-- Validation init js-->
-    <script src="{{asset('assets')}}\admin\js\pages\form-validation.init.js"></script>
+  <!-- Validation init js-->
+  <script src="{{asset('assets')}}\admin\js\pages\form-validation.init.js"></script>
+
+  <script src="{{asset('assets')}}\admin\libs\select2\select2.min.js"></script>
+
+  <script src="{{asset('assets')}}\admin\js\pages\form-advanced.init.js"></script>
 
   <!-- App js -->
   <script src="{{asset('assets')}}\admin\js\app.min.js"></script>
