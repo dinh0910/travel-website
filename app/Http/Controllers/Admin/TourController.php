@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Journey;
 use App\Models\Place;
 use App\Models\Tour;
+use App\Models\TourPage;
 use Illuminate\Http\Request;
 
 class TourController extends Controller
@@ -19,8 +19,8 @@ class TourController extends Controller
   {
     $tours = Tour::all();
     $places = Place::all();
-    $journeys = Journey::all();
-    return view('admin.tours.index', compact('tours', 'places', 'journeys'));
+    $tq = TourPage::all();
+    return view('admin.tours.index', compact('tours', 'places', 'tq'));
   }
 
   /**
@@ -31,8 +31,7 @@ class TourController extends Controller
   public function create()
   {
     $places = Place::all();
-    $journeys = Journey::all();
-    return view('admin.tours.add', compact('places', 'journeys'));
+    return view('admin.tours.add', compact('places'));
   }
 
   /**
@@ -67,8 +66,7 @@ class TourController extends Controller
   public function edit(Tour $tour)
   {
     $places = Place::all();
-    $journeys = Journey::all();
-    return view('admin.tours.edit', compact('tour', 'places', 'journeys'));
+    return view('admin.tours.edit', compact('tour', 'places'));
   }
 
   /**
@@ -93,6 +91,19 @@ class TourController extends Controller
   public function destroy(Tour $tour)
   {
     $tour->delete();
+    return redirect()->route('tour.index');
+  }
+
+  public function tourPage()
+  {
+    $tp = TourPage::all();
+    $tours = Tour::all();
+    return view('admin.tours.tourPage', compact('tp', 'tours'));
+  }
+
+  public function createTourPage(Request $req)
+  {
+    TourPage::create($req->all());
     return redirect()->route('tour.index');
   }
 }

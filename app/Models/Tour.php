@@ -12,6 +12,6 @@ class Tour extends Model
     protected $fillable = [
       'name',
       'place_id',
-      'journey_id', 'departure', 'vehicle', 'price', 'sale', 'sale_price'
+      'journey', 'departure', 'vehicle', 'price', 'sale', 'sale_price'
     ];
 }

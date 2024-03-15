@@ -11,8 +11,16 @@
   <!-- App favicon -->
   <link rel="shortcut icon" href="{{asset('assets')}}\admin\images\favicon.ico">
 
+  <script src="https://cdn.tiny.cloud/1/wy8hvpex1ve9bh8o8j4bu8ty0cab0sa9l5e903f7cc0cg96p/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>  <script>
+    tinymce.init({
+      selector: '#content'
+    });
+  </script>
+
   <!-- Plugins css-->
   <link href="{{asset('assets')}}\admin\libs\sweetalert2\sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+  <link href="{{asset('assets')}}\admin\libs\switchery\switchery.min.css" rel="stylesheet" type="text/css">
 
   <!-- third party css -->
   <link href="{{asset('assets')}}\admin\libs\datatables\dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
@@ -113,6 +121,8 @@
 
   <!-- Plugin js-->
   <script src="{{asset('assets')}}\admin\libs\parsleyjs\parsley.min.js"></script>
+
+  <script src="{{asset('assets')}}\admin\libs\switchery\switchery.min.js"></script>
 
   <!-- Validation init js-->
   <script src="{{asset('assets')}}\admin\js\pages\form-validation.init.js"></script>

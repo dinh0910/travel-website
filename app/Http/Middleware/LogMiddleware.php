@@ -19,10 +19,11 @@ class LogMiddleware
   public function handle(Request $request, Closure $next)
   {
     $requestData = [
-      'request' => $request->method(),
+      // 'request' => json_encode($request->all()),
       // 'request' => $request->headers->get('referer'),
-      'endpoint' => $request->fullUrl(),
-      // 'endpoint' => $request->path(),
+      // 'endpoint' => $request->fullUrl(),
+      // 'request' => $request,
+      'endpoint' => $request->path(),
       // Add more details as needed
     ];
 

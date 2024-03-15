@@ -15,8 +15,7 @@ class CreateListRoomsTable extends Migration
   {
     Schema::create('list_rooms', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('hotel_id');
-      $table->foreign('hotel_id')->references('id')->on('hotels');
+      $table->bigInteger('hotel_id');
       $table->string('name');
       $table->text('description');
       $table->tinyInteger('size');

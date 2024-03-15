@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourPagesTable extends Migration
+class CreateHotelPagesTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTourPagesTable extends Migration
    */
   public function up()
   {
-    Schema::create('tour_pages', function (Blueprint $table) {
+    Schema::create('hotel_pages', function (Blueprint $table) {
       $table->id();
-      $table->bigInteger('tour_id');
-      $table->string('title');
-      $table->string('description');
+      $table->bigInteger('hotel_id');
       $table->text('content');
       $table->timestamps();
     });
@@ -30,6 +28,6 @@ class CreateTourPagesTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('tour_pages');
+    Schema::dropIfExists('hotel_pages');
   }
 }

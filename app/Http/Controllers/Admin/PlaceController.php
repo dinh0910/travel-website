@@ -60,7 +60,7 @@ class PlaceController extends Controller
    */
   public function edit(Place $place)
   {
-    return view('admin.places.edit', compact('place'));
+    //
   }
 
   /**

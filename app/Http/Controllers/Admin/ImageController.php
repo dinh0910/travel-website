@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -46,8 +47,9 @@ class ImageController extends Controller
   public function destroy(Request $req)
   {
     $img = Image::find($req->id);
+    Storage::delete('public/images/', $img->path);
     $img->delete();
-    File::delete( $img->path);
+
     return redirect()->route('admin.library');
   }
 }
