@@ -18,14 +18,17 @@ class LogMiddleware
    */
   public function handle(Request $request, Closure $next)
   {
-    $requestData = [
-      // 'request' => json_encode($request->all()),
-      // 'request' => $request->headers->get('referer'),
-      // 'endpoint' => $request->fullUrl(),
-      // 'request' => $request,
-      'endpoint' => $request->path(),
-      // Add more details as needed
-    ];
+    if (strpos($request->path(), 'admin') !== false) {
+      $requestData = [
+        'request' => json_encode($request->all()),
+        // 'request' => $request->headers->get('referer'),
+        // 'endpoint' => $request->fullUrl(),
+        // 'request' => $request,
+        'type' => 'admin',
+        'endpoint' => $request->path(),
+        // Add more details as needed
+      ];
+    }
 
     ModelsLog::create($requestData);
 

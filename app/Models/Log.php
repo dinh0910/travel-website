@@ -12,6 +12,7 @@ class Log extends Model
   protected $fillable = [
     'request',
     'endpoint',
+    'type',
     'created_at'
   ];
 

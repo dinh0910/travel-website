@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
-  public function index(){
+  public function index()
+  {
     $logs = Log::all();
     return view('admin.logs.index', compact('logs'));
   }
