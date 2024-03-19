@@ -44,10 +44,26 @@ class ImageController extends Controller
     return redirect()->back()->with('success', 'Image uploaded successfully!');
   }
 
+  public function update(Request $req, $id)
+  {
+    $req->validate([
+      'file.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
+    ]);
+    if ($req->hasFile('file')) {
+      $fileName = $req->file->getClientOriginalName();
+      $req->file->storeAs('public/images', $fileName);
+      $img = Image::find($id);
+      $img->path = $fileName;
+      $img->save();
+    }
+    return redirect()->back();
+  }
+
   public function destroy(Request $req)
   {
     $img = Image::find($req->id);
-    Storage::delete('public/images/', $img->path);
+    $name = $img->path;
+    Storage::delete('public/images/' . $name);
     $img->delete();
 
     return redirect()->route('admin.library');

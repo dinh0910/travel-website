@@ -34,23 +34,20 @@
           </a>
         </li>
 
-        <li>
+        {{-- Lịch sử hoạt động --}}
+        {{-- <li>
           <a href="{{route('admin.log')}}" class="waves-effect">
             <i class="ion-md-speedometer"></i>
             <span> Lịch sử hoạt động </span>
           </a>
-        </li>
+        </li> --}}
 
         <li>
           <a href="{{route('admin.library')}}" class="waves-effect">
             <i class="ion-md-speedometer"></i>
             <span> Thư viện ảnh </span>
-            <span class="menu-arrow"></span>
             {{-- <span class="badge badge-info badge-pill float-right"> 3 </span> --}}
           </a>
-          <ul class="nav-second-level" aria-expanded="false">
-            <li><a href="{{route('admin.image')}}">Tải hình ảnh</a></li>
-          </ul>
         </li>
 
         {{-- <li>

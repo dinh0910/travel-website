@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tour extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-      'name',
-      'place_id',
-      'journey', 'departure', 'vehicle', 'price', 'sale', 'sale_price'
-    ];
+  protected $fillable = [
+    'name', 'place', 'journey',
+    'departure', 'vehicle', 'price', 'sale', 'sale_price', 'special'
+  ];
+
+  protected $casts = [
+    'place' => 'json',
+    'journey' => 'json',
+    'special' => 'json'
+  ];
 }

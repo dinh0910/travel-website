@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class TypeHotel extends Model
 {
   use HasFactory;
 
   protected $fillable = [
-    'path',
-    'created_at',
-    'updated_at',
+    'name', 'created_at'
   ];
 }

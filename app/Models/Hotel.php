@@ -15,6 +15,7 @@ class Hotel extends Model
     'restaurant_coffee',
     'view_sea',
     'air_conditional',
-    'price'
+    'price',
+    'type_hotel_id', 'place_id'
   ];
 }

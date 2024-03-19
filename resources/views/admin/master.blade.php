@@ -22,6 +22,8 @@
 
   <link href="{{asset('assets')}}\admin\libs\switchery\switchery.min.css" rel="stylesheet" type="text/css">
 
+  <link href="{{asset('assets')}}\admin\libs\select2\select2.min.css" rel="stylesheet" type="text/css">
+
   <!-- third party css -->
   <link href="{{asset('assets')}}\admin\libs\datatables\dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('assets')}}\admin\libs\datatables\buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
@@ -41,6 +43,15 @@
       max-height: 100%;
       word-wrap: break-word;
     }
+
+    .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Safari */
+    -khtml-user-select: none;    /* Konqueror HTML */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently supported by Chrome, Opera, and Firefox */
+}
   </style>
 
 </head>

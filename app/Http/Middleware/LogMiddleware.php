@@ -28,6 +28,16 @@ class LogMiddleware
         'endpoint' => $request->path(),
         // Add more details as needed
       ];
+    } else {
+      $requestData = [
+        'request' => json_encode($request->all()),
+        // 'request' => $request->headers->get('referer'),
+        // 'endpoint' => $request->fullUrl(),
+        // 'request' => $request,
+        'type' => 'user',
+        'endpoint' => $request->path(),
+        // Add more details as needed
+      ];
     }
 
     ModelsLog::create($requestData);

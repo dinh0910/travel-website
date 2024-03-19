@@ -6,10 +6,13 @@ use App\Http\Controllers\Admin\HotelController;
 use App\Http\Controllers\Admin\HotelPageController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\JourneyController;
+use App\Http\Controllers\Admin\LocationTourController;
 use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\PlaceController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TourPageController;
+use App\Http\Controllers\Admin\TypeHotelController;
+use App\Models\LocationTour;
 use App\Models\Place;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
   return view('welcome');
-});
+})->middleware('log');
 
 Route::prefix('login-admin')->middleware('log')->group(function () {
   Route::get('/login-admin', [AdminController::class, 'login'])->name('admin.login');
@@ -39,6 +42,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/library', [ImageController::class, 'library'])->name('admin.library');
     Route::get('/upload-image', [ImageController::class, 'index'])->name('admin.image');
     Route::post('/upload-image', [ImageController::class, 'upload'])->name('admin.upload');
+    Route::put('/upload-image/{image}', [ImageController::class, 'update'])->name('image.update');
     Route::delete('/library', [ImageController::class, 'destroy'])->name('image.delete');
 
     //Places
@@ -46,6 +50,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     //Hotels
     Route::resource('hotel', HotelController::class);
+
+    // Types Hotel
+    Route::resource('type-hotel', TypeHotelController::class);
+
     Route::get('/hotelpage', [HotelController::class, 'hotelPage'])->name('hotelpage.index');
     Route::post('/hotelpage', [HotelController::class, 'createHotelPage'])->name('hotelpage.create');
     Route::put('/hotelpage/{id}', [HotelPageController::class, 'updateHotelPage'])->name('hotelpage.update');
@@ -54,6 +62,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     //Tours
     Route::resource('tour', TourController::class);
+
     Route::get('/tourpage', [TourController::class, 'tourPage'])->name('tour.tourpage');
     Route::post('/tourpage', [TourController::class, 'createTourPage'])->name('tourpage.create');
     Route::put('/tourpage/{id}', [TourPageController::class, 'updateTourPage'])->name('tourpage.update');

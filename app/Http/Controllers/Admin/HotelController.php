@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use App\Models\HotelPage;
+use App\Models\Place;
+use App\Models\TypeHotel;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -18,7 +20,9 @@ class HotelController extends Controller
   {
     $hotels = Hotel::all();
     $hq = HotelPage::all();
-    return view('admin.hotels.index', compact('hotels', 'hq'));
+    $types = TypeHotel::all();
+    $places = Place::all();
+    return view('admin.hotels.index', compact('hotels', 'hq', 'types', 'places'));
   }
 
   /**
@@ -38,7 +42,22 @@ class HotelController extends Controller
    */
   public function store(Request $req)
   {
+    // $vs = $req->has('view_sea') ? 'on' : '1';
+    // $r = $req->has('restaurant_coffee') ? 'on' : '1';
+    // $w = $req->has('wifi') ? 'on' : '1';
+    // $a = $req->has('air_conditional') ? 'on' : '1';
+
+    // $requestData = [
+    //   'name' => $req->name,
+    //   'view_sea' => $vs,
+    //   'restaurant_coffee' => $r,
+    //   'wifi' => $w,
+    //   'air_conditional' => $a,
+    //   'price' => $req->price
+    // ];
+    // Hotel::create($requestData);
     Hotel::create($req->all());
+
     return redirect()->route('hotel.index');
   }
 
@@ -79,8 +98,10 @@ class HotelController extends Controller
     $a = $req->has('air_conditional') ? 'on' : '1';
     // dd($vs);
 
-    $model = Hotel::findOrFail($req->id);
+    $model = Hotel::find($req->id);
     $model->name = $req->name;
+    $model->type_hotel_id = $req->type_hotel_id;
+    $model->place_id = $req->place_id;
     $model->view_sea = $vs;
     $model->restaurant_coffee = $r;
     $model->wifi = $w;
@@ -115,5 +136,32 @@ class HotelController extends Controller
   {
     HotelPage::create($req->all());
     return redirect()->route('hotel.index');
+  }
+
+  public function type()
+  {
+    $types = TypeHotel::all();
+    return view('admin.hotels.typeHotel', compact('types'));
+  }
+
+  public function createType(Request $req)
+  {
+    TypeHotel::create($req->all());
+    return redirect()->route('hotel.type');
+  }
+
+  public function updateType(Request $req, $id)
+  {
+    $type = TypeHotel::find($id);
+    $type->name = $req->name;
+    $type->save();
+    return redirect()->route('hotel.type');
+  }
+
+  public function destroyType($id)
+  {
+    $type = TypeHotel::find($id);
+    $type->delete();
+    return redirect()->route('hotel.type');
   }
 }

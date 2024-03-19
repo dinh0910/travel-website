@@ -27,7 +27,7 @@
       <div class="col-12">
         <div class="card">
             <div class="card-body table-responsive">
-              <button class="btn btn-primary mb-4" data-toggle="modal" data-target=".bs-modal-lg">Thêm mới</button>
+              <button class="btn btn-outline-primary mb-4" data-toggle="modal" data-target=".bs-modal-lg">Thêm mới</button>
 
               <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -45,7 +45,7 @@
                             class="form-control" id="userName">
                         </div>
                         <div class="form-group text-right mb-0">
-                          <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                          <button class="btn btn-outline-primary waves-effect waves-light mr-1" type="submit">
                             Thêm
                           </button>
                         </div>
@@ -55,13 +55,15 @@
                 </div>
               </div> 
 
-              <table id="datatable" class="table table-bordered table-striped table-fixed"
+              <table id="datatable-sort-2" class="table table-bordered table-striped table-fixed"
                 style="border-collapse: collapse; border-spacing: 0; width: 100%;"
               >
                 <thead>
                   <tr>
-                    <th width="50px"></th>
-                    <th>Địa điểm</th>
+                    <th width="10%">Hành động</th>
+                    <th width="50%">Địa điểm</th>
+                    <th width="20%">Ngày tạo</th>
+                    <th width="20%">Ngày cập nhật</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,12 +71,14 @@
                     <tr>
                       <td>
                         <div class="d-flex justify-content-center">
-                          <button class="btn btn-warning mr-1" style="width: 75px;" data-toggle="modal" data-target=".bs-{{$item->id}}">Edit</button>
+                          <button class="btn btn-outline-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;" data-toggle="modal" data-target=".bs-{{$item->id}}">
+                            <i class="mdi mdi-playlist-edit"></i>
+                          </button>
                           <div class="modal fade bs-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="myLargeModalLabel">Thêm địa điểm</h5>
+                                  <h5 class="modal-title" id="myLargeModalLabel">Sửa địa điểm {{$item->name}}</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                 <div class="modal-body">
@@ -87,8 +91,8 @@
                                         class="form-control" id="userName" value="{{$item->name}}">
                                     </div>
                                     <div class="form-group text-right mb-0">
-                                      <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                        Thêm
+                                      <button class="btn btn-outline-primary waves-effect waves-light mr-1" type="submit">
+                                        Sửa
                                       </button>
                                     </div>
                                   </form>
@@ -97,7 +101,9 @@
                             </div>
                           </div> 
 
-                          <button data-toggle="modal" data-target=".bs-{{$item->id}}-modal-sm" class="btn btn-danger" style="width: 75px;">Delete</button>
+                          <button data-toggle="modal" data-target=".bs-{{$item->id}}-modal-sm" class="btn btn-outline-danger" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                            <i class="mdi mdi-trash-can"></i>
+                          </button>
                           <div class="modal fade bs-{{$item->id}}-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                               <div class="modal-content" style="width: 350px;">
@@ -109,7 +115,7 @@
                                   <form action="{{route('place.destroy', $item)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger">Xóa</button>  
+                                    <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger">Xóa</button>  
                                   </form>
                                 </div>
                               </div>
@@ -118,6 +124,8 @@
                         </div>
                       </td>
                       <td>{{$item->name}}</td>
+                      <td>{{$item->created_at}}</td>
+                      <td>{{$item->updated_at}}</td>
                     </tr>
                   @endforeach
                 </tbody>

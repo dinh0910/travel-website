@@ -15,8 +15,4 @@ class Log extends Model
     'type',
     'created_at'
   ];
-
-  protected $casts = [
-    'created_at' => 'date',
-  ];
 }

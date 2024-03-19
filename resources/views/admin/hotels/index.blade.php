@@ -28,8 +28,8 @@
         <div class="card">
           <div class="card-body table-responsive">
             <div class="d-flex justify-content-start mb-4">
-              <button class="btn btn-primary mr-3" data-toggle="modal" data-target=".bs-modal-lg">Thêm mới</button>
-              <a href="{{route('hotelpage.index')}}" class="btn btn-primary">Trang khách sạn</a>
+              <button class="btn btn-outline-primary mr-3" data-toggle="modal" data-target=".bs-modal-lg">Thêm mới</button>
+              <a href="{{route('type-hotel.index')}}" class="btn btn-outline-primary">Thêm loại khách sạn</a>
             </div>
 
             <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
@@ -46,6 +46,26 @@
                         <label for="userName">Tên khách sạn<span class="text-danger">*</span></label>
                         <input type="text" maxlength="100" name="name" parsley-trigger="change" required="" placeholder="Nhập tên khách sạn"
                           class="form-control" id="userName">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="type">Loại khách sạn<span class="text-danger">*</span></label>
+                        <select class="form-control" name="type_hotel_id" id="type" required>
+                          <option selected>Chọn loại khách sạn</option>
+                          @foreach ($types as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="place">Địa chỉ<span class="text-danger">*</span></label>
+                        <select class="form-control" name="place_id" id="place" required>
+                          <option selected>Chọn địa chỉ của khách sạn</option>
+                          @foreach ($places as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
+                          @endforeach
+                        </select>
                       </div>
         
                       <div class="form-group">
@@ -75,7 +95,7 @@
                       </div>
         
                       <div class="form-group text-right mb-0">
-                        <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                        <button class="btn btn-outline-primary waves-effect waves-light mr-1" type="submit">
                           Thêm
                         </button>
                       </div>
@@ -85,18 +105,21 @@
               </div>
             </div>  
 
-            <table id="datatable" class="table table-bordered table-striped table-fixed dt-responsive"
+            <table id="datatable-start-end" class="table table-bordered table-striped table-fixed dt-responsive"
               style="border-collapse: collapse; border-spacing: 0; width: 100%;"
             >
               <thead>
                 <tr>
-                  <th width="50px"></th>
+                  <th width="5%">Hành động</th>
                   <th>Tên khách sạn</th>
+                  <th>Loại</th>
+                  <th>Địa điểm</th>
                   <th>Cảnh biển</th>
                   <th>Nhà hàng & coffee</th>
                   <th>Wifi</th>
                   <th>Máy lạnh</th>
                   <th>Giá</th>
+                  <th width="5%">Chi tiết</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,79 +127,17 @@
                   <tr>
                     <td>
                       <div class="d-flex justify-content-center">
-                        <button data-toggle="modal" data-target=".bs-tourpage-{{$item->id}}" class="btn btn-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
-                          <i class="mdi mdi-information-outline"></i>
+                        @if ($item->active == 1)
+                        <button data-toggle="modal" data-target=".bs-tourpage-{{$item->id}}" class="btn btn-outline-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                          <i class="mdi mdi-checkbox-blank-circle-outline"></i>
                         </button>
+                      @else
+                        <button data-toggle="modal" data-target=".bs-tourpage-{{$item->id}}" class="btn btn-outline-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </button>
+                      @endif
 
-                        <div class="modal fade bs-tourpage-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="myLargeModalLabel">Thêm nội dung khách sạn {{$item->name}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                              </div>
-                              <div class="modal-body">
-                                @forelse ($hq as $i)
-                                  @if ($item->id == $i->hotel_id)
-
-                                  @endif
-                                @empty
-                                <form class="parsley-examples" action="{{route('hotelpage.create')}}" method="POST">
-                                  @csrf
-                                  <input type="hidden" name="hotel_id" value="{{$item->id}}">
-                                  <div class="form-group">
-                                    <label for="content">Nội dung<span class="text-danger">*</span></label>
-                                    <textarea name="content" parsley-trigger="change" required="" placeholder="Nhập nội dung"
-                                      class="form-control" id="content"></textarea>
-                                  </div>
-                                  <div class="form-group text-right mb-0">
-                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                      Cập nhật
-                                    </button>
-                                  </div>
-                                </form>
-                                @endforelse
-                              </div>
-                              <div class="modal-footer">
-                                @foreach ($hq as $i)
-                                  @if ($item->id == $i->hotel_id)
-                                  <button type="button" data-toggle="modal" data-target=".bs-tourpage-edit-{{$i->id}}" class="btn btn-primary waves-effect">Sửa</button>
-
-                                  <div class="modal fade bs-tourpage-edit-{{$i->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="myLargeModalLabel">Sửa trang khách sạn {{$item->nam}}</h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <form class="parsley-examples" action="{{route('hotelpage.update', $i->id)}}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="hotel_id" value="{{$item->id}}">
-                                            <div class="form-group">
-                                              <label for="content">Nội dung<span class="text-danger">*</span></label>
-                                              <textarea name="content" parsley-trigger="change" required=""
-                                                class="form-control" id="content">{!!$i->content!!}</textarea>
-                                            </div>
-                                            <div class="form-group text-right mb-0">
-                                              <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                                Cập nhật
-                                              </button>
-                                            </div>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  @endif
-                                @endforeach
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <button href="{{route('hotel.edit', $item)}}" data-toggle="modal" data-target=".bs-{{$item->id}}" class="btn btn-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                        <button href="{{route('hotel.edit', $item)}}" data-toggle="modal" data-target=".bs-{{$item->id}}" class="btn btn-outline-primary mr-1" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
                           <i class="mdi mdi-playlist-edit"></i>
                         </button>
                         <div class="modal fade bs-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
@@ -195,6 +156,34 @@
                                     <label for="userName">Tên khách sạn<span class="text-danger">*</span></label>
                                     <input type="text" value="{{$item->name}}" maxlength="100" name="name" parsley-trigger="change" required="" placeholder="Nhập tên khách sạn"
                                       class="form-control" id="userName">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="type">Loại khách sạn<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="type_hotel_id" id="type" required>
+                                      <option selected>Chọn loại khách sạn</option>
+                                      @foreach ($types as $type)
+                                        @if ($type->id == $item->type_hotel_id)
+                                          <option value="{{$type->id}}" selected>{{$type->name}}</option>
+                                        @else
+                                          <option value="{{$type->id}}">{{$type->name}}</option>
+                                        @endif
+                                      @endforeach
+                                    </select>
+                                  </div>
+            
+                                  <div class="form-group">
+                                    <label for="place">Địa chỉ<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="place_id" id="place" required>
+                                      <option selected>Chọn địa chỉ của khách sạn</option>
+                                      @foreach ($places as $type)
+                                        @if ($type->id == $item->place_id)
+                                          <option value="{{$type->id}}" selected>{{$type->name}}</option>
+                                        @else
+                                          <option value="{{$type->id}}">{{$type->name}}</option>
+                                        @endif
+                                      @endforeach
+                                    </select>
                                   </div>
                     
                                   <div class="form-group">
@@ -250,9 +239,20 @@
                           </div>
                         </div>
 
-                        <button data-toggle="modal" data-target=".bs-{{$item->id}}-modal-sm" class="btn btn-danger" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                        @if ($item->active != 1)
+                        <button data-toggle="modal" data-target=".bs-{{$item->id}}-modal-sm" class="btn btn-outline-secondary"
+                          style="width: 40px; padding: 3px; height: 100%; font-size: 17px;" disabled
+                        >
                           <i class="mdi mdi-trash-can"></i>
                         </button>
+                      @else
+                        <button data-toggle="modal" data-target=".bs-{{$item->id}}-modal-sm" class="btn btn-outline-danger"
+                          style="width: 40px; padding: 3px; height: 100%; font-size: 17px;"
+                        >
+                          <i class="mdi mdi-trash-can"></i>
+                        </button>
+                      @endif
+
                         <div class="modal fade bs-{{$item->id}}-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;" aria-hidden="true">
                           <div class="modal-dialog modal-sm">
                             <div class="modal-content" style="width: 350px;">
@@ -264,7 +264,7 @@
                                 <form action="{{route('hotel.destroy', $item->id)}}" method="post">
                                   @csrf
                                   @method('DELETE')
-                                  <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger">Xóa</button>  
+                                  <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger">Xóa</button>  
                                 </form>
                               </div>
                             </div>
@@ -273,6 +273,20 @@
                       </div>
                     </td>
                     <td>{{$item->name}}</td>
+                    <td>
+                      @foreach ($types as $type)
+                        @if ($item->type_hotel_id == $type->id)
+                          {{$type->name}}
+                        @endif
+                      @endforeach  
+                    </td>
+                    <td>
+                      @foreach ($places as $type)
+                        @if ($item->place_id == $type->id)
+                          {{$type->name}}
+                        @endif
+                      @endforeach   
+                    </td>
                     <td>
                       {{($item->view_sea == 0) ? 'Có' : 'Không'}}
                     </td>
@@ -286,6 +300,13 @@
                       {{($item->air_conditional == 0) ? 'Có' : 'Không'}}
                     </td>
                     <td>{{number_format($item->price, 0, ',', ',')}} VND</td>
+                    <td>
+                      <div class="d-flex justify-content-center">
+                        <a href="" class="btn btn-outline-primary" style="width: 40px; padding: 3px; height: 100%; font-size: 17px;">
+                          <i class="mdi mdi-file-document-box-plus-outline"></i>
+                        </a>  
+                      </div>
+                    </td>
                   </tr>
                 @endforeach
               </tbody>

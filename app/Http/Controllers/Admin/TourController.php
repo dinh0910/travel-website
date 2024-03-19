@@ -19,8 +19,9 @@ class TourController extends Controller
   {
     $tours = Tour::all();
     $places = Place::all();
-    $tq = TourPage::all();
-    return view('admin.tours.index', compact('tours', 'places', 'tq'));
+    $tp = TourPage::all();
+    return view('admin.tours.index', compact('tours', 'places', 'tp'));
+
   }
 
   /**
@@ -42,7 +43,29 @@ class TourController extends Controller
    */
   public function store(Request $req)
   {
-    Tour::create($req->all());
+    $places = [];
+    for ($i = 0; $i < count($req->place); $i++) {
+      $places['key' . $i] = $req->place[$i];
+    }
+
+    $journey = ['day' => $req->journey_day, 'night' => $req->journey_night];
+
+    $special = ['color' => '', 'status' => ''];
+
+    $requestData = [
+      'name' => $req->name,
+      'place' => $places,
+      'journey' => $journey,
+      'departure' => $req->departure,
+      'vehicle' => $req->vehicle,
+      'price' => $req->price,
+      'sale' => $req->sale,
+      'sale_price' => $req->sale_price,
+      'special' => $special
+    ];
+
+    Tour::create($requestData);
+
     return redirect()->route('tour.index');
   }
 
@@ -78,7 +101,35 @@ class TourController extends Controller
    */
   public function update(Request $req, Tour $tour)
   {
-    $tour->update($req->all());
+    if ($req->place != null) {
+      $places = [];
+      for ($i = 0; $i < count($req->place); $i++) {
+        $places['key' . $i] = $req->place[$i];
+      }
+    }
+
+    $journey = ['day' => $req->journey_day, 'night' => $req->journey_night];
+    if ($req->status) {
+      $color = str_replace("#", '', $req->color);
+      $special = ['color' => $color, 'status' => $req->status];
+    }
+
+    $tour = Tour::find($tour->id);
+
+    $tour->name = $req->name;
+    if ($req->place != null) {
+      $tour->place = $places;
+    }
+    $tour->journey = $journey;
+    $tour->departure = $req->departure;
+    $tour->vehicle = $req->vehicle;
+    $tour->price = $req->price;
+    $tour->sale = $req->sale;
+    $tour->sale_price = $req->sale_price;
+    if ($req->status) {
+      $tour->special = $special;
+    }
+    $tour->save();
     return redirect()->route('tour.index');
   }
 

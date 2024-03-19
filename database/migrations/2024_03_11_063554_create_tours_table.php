@@ -16,13 +16,15 @@ class CreateToursTable extends Migration
     Schema::create('tours', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->bigInteger('place_id');
-      $table->string('journey');
+      $table->json('place');
+      $table->json('journey');
       $table->string('departure');
       $table->string('vehicle');
       $table->integer('price');
       $table->integer('sale');
       $table->integer('sale_price');
+      $table->tinyInteger('active')->default(1);
+      $table->json('special');
       $table->timestamps();
     });
   }

@@ -42,7 +42,7 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane show active" id="home1">
-              <table id="datatable" class="table table-bordered table-striped table-fixed" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+              <table id="datatable1" class="table table-bordered table-striped table-fixed" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                   <tr>
                     <th width="60%">Request</th>
@@ -64,7 +64,7 @@
               </table>
             </div>
             <div class="tab-pane show" id="profile1">
-              <table id="datatable1" class="table table-bordered table-striped table-fixed" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+              <table id="datatable2" class="table table-bordered table-striped table-fixed" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                   <tr>
                     <th width="60%">Request</th>
